@@ -18,14 +18,17 @@ module.exports = {
         where: {codigo: cod}
 
       }).then((produto) =>{
-        if (qusers == "" || qusers == 0) { //Validação da quantidade requisitada pelo usuário
-          res.send("Informe uma quantidade.")
+        if (qusers == "" && qusers == 0 && cod == "") {//Validação dos campos de quantidade e código
+          res.send("Informe um código e uma quantidade.")
         }
-        else if (qusers > 10 ) {//Restrição da quantidade na compra de 1 até 10 produtos.
-          res.send("Só é possível comprar no máximo 10 produtos por vez.")
+        else if (qusers == "" || qusers == 0) { //Validação da quantidade requisitada pelo usuário
+          res.send("Informe uma quantidade.")
         }
         else if (cod == "") {//Validação do espaço do código
           res.send("Informe um código.")
+        }
+        else if (qusers > 10 ) {//Restrição da quantidade na compra de 1 até 10 produtos.
+          res.send("Só é possível comprar no máximo 10 produtos por vez.")
         }
         else if (produto == null) {//Validação do código requisitado pelo usuário
           res.send("Produto não encontrado.")
